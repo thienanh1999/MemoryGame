@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1522935749 source:c:\users\jinny\desktop\project game\myfirstgame\main.cpp
+	<iostream>
+	<Generate.h>
+
+1522935738 c:\users\jinny\desktop\project game\myfirstgame\include\generate.h
+
+1522935796 source:c:\users\jinny\desktop\project game\myfirstgame\src\generate.cpp
+	"Generate.h"
+	<iostream>
+
