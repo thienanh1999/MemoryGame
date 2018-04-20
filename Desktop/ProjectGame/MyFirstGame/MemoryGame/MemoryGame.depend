@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1524147903 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\generate.cpp
+	"Generate.h"
+	<bits/stdc++.h>
+
+1524149197 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\generate.h
+
+1524236585 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\main.cpp
+	<iostream>
+	"Game.h"
+	"GameData.h"
+
+1524235678 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\gamedata.h
+
+1524236644 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\gamedata.cpp
+	"GameData.h"
+	<bits/stdc++.h>
+
+1524236027 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.h
+	"GameData.h"
+
+1524236507 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.cpp
+	"Game.h"
+	<bits/stdc++.h>
+	"GameData.h"
+
