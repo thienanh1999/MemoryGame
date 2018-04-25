@@ -1,18 +1,13 @@
 #include <iostream>
 #include "Game.h"
 #include "GameData.h"
+#include <SDL.h>
 using namespace std;
 
-int main()
+int main(int argc, char* args[])
 {
+    Graph g;
     Board board;
-    board.Width = 4;
-    board.Height = 4;
-    board.Gen();
-    board.InitGame();
-    Match match;
-    match.Init();
-    board.EndGame(true,match);
-    match.Show();
+    g.CreatGameWindow(board.Width, board.Height, board.Map);
     return 0;
 }

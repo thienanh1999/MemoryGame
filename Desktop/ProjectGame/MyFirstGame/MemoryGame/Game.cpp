@@ -1,6 +1,8 @@
 #include "Game.h"
 #include <bits/stdc++.h>
 #include "GameData.h"
+#include <SDL.h>
+#include <SDL_image.h>
 bool Board :: Valid()
 {
     return (Width > 0) && (Height > 0) && (Width*Height % 2 == 0);
@@ -81,4 +83,25 @@ void Board :: InitGame()
 void Board :: EndGame(bool IsWin, Match& match)
 {
     match.Update(IsWin);
+}
+
+void Graph :: CreatGameWindow(int x, int y, int Map[500][500])
+{
+    SDL_Window* window = NULL;
+    SDL_Surface* surface = NULL;
+    SDL_Surface* background = NULL;
+    SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_JPG || IMG_INIT_PNG);
+
+    window = SDL_CreateWindow("Main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, SDL_WINDOW_SHOWN);
+    //name, vi tri x, vi tri y, width, height, ability
+    surface = SDL_GetWindowSurface(window);
+    background = IMG_Load("Background/background.jpg");
+    if (background == NULL) std::cout << "x";
+    SDL_BlitSurface(background, NULL, surface, NULL);
+    SDL_UpdateWindowSurface(window);
+    SDL_Delay(5000);
+    SDL_FreeSurface(background);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }

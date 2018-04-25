@@ -31,7 +31,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="SDL2-2.0.8/i686-w64-mingw32/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2" />
+			<Add directory="SDL2-2.0.8/i686-w64-mingw32/lib" />
+		</Linker>
 		<Unit filename="Game.cpp">
 			<Option target="Debug" />
 		</Unit>

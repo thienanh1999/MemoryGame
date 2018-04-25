@@ -21,4 +21,12 @@ public:
     void EndGame(bool, Match&);
 };
 
+class Graph{
+public:
+    int Width;
+    int Height;
+
+    void CreatGameWindow(int, int, int[500][500]);
+};
+
 #endif // GAME_H_INCLUDED
