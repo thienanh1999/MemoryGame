@@ -91,12 +91,11 @@ void Graph :: CreatGameWindow(int x, int y, int Map[500][500])
     SDL_Surface* surface = NULL;
     SDL_Surface* background = NULL;
     SDL_Init(SDL_INIT_VIDEO);
-    IMG_Init(IMG_INIT_JPG || IMG_INIT_PNG);
 
     window = SDL_CreateWindow("Main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, SDL_WINDOW_SHOWN);
     //name, vi tri x, vi tri y, width, height, ability
     surface = SDL_GetWindowSurface(window);
-    background = IMG_Load("Background/background.jpg");
+    background = SDL_LoadBMP("src/Background/background.bmp");
     if (background == NULL) std::cout << "x";
     SDL_BlitSurface(background, NULL, surface, NULL);
     SDL_UpdateWindowSurface(window);
