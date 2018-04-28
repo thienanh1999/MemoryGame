@@ -10,6 +10,8 @@ bool Board :: Valid()
 
 void Board :: Gen()
 {
+    Width = 8;
+    Height = 4;
     srand(time(NULL));
     int numOfPairs = Width*Height/2;
     int a[Width*Height];
@@ -28,12 +30,14 @@ void Board :: Gen()
     }
     int dem = 0;
     for (int i = 1; i <= Height; i++)
+    {
         for (int j = 1; j <= Width; j++)
         {
             dem++;
             Map[i][j] = a[dem];
-            MapShow[i][j] = 0;
+            MapShow[i][j] = 1;
         }
+    }
     Fliped = 0;
 }
 
@@ -85,22 +89,155 @@ void Board :: EndGame(bool IsWin, Match& match)
     match.Update(IsWin);
 }
 
-void Graph :: CreatGameWindow(int x, int y, int Map[500][500])
+void Graph :: CreatGameWindow(int x, int y, int Map[50][50])
 {
-    SDL_Window* window = NULL;
-    SDL_Surface* surface = NULL;
+    Window = NULL;
+    Surface = NULL;
     SDL_Surface* background = NULL;
     SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_JPG || IMG_INIT_PNG);
 
-    window = SDL_CreateWindow("Main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, SDL_WINDOW_SHOWN);
+    Window = SDL_CreateWindow("Main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, SDL_WINDOW_SHOWN);
     //name, vi tri x, vi tri y, width, height, ability
-    surface = SDL_GetWindowSurface(window);
-    background = SDL_LoadBMP("src/Background/background.bmp");
-    if (background == NULL) std::cout << "x";
-    SDL_BlitSurface(background, NULL, surface, NULL);
-    SDL_UpdateWindowSurface(window);
-    SDL_Delay(5000);
+    Surface = SDL_GetWindowSurface(Window);
+    //background = SDL_LoadBMP("src/Background/background.bmp");
+    background = IMG_Load("src/Background/background.jpg");
+    SDL_BlitSurface(background, NULL, Surface, NULL);
+    SDL_UpdateWindowSurface(Window);
+    SDL_Delay(1000);
     SDL_FreeSurface(background);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+   // SDL_DestroyWindow(Window);
+   // SDL_Quit();
+}
+
+void Graph::CloseWindow()
+{
+    SDL_DestroyWindow(Window);
+   // SLD_Quit();
+}
+
+void Graph::InitMap(Board board)
+{
+    int X = 50;
+    int Y = 50;
+    for (int i = 1; i <= board.Height; i++)
+    {
+        Y = 50;
+        for (int j = 1; j <= board.Width; j++)
+        {
+            if (board.MapShow[i][j] == false)
+                PutItem(Y,X,0);
+            else
+                PutItem(Y,X,board.Map[i][j]);
+            PosX[i][j] = X;
+            PosY[i][j] = Y;
+            Y += 60;
+        }
+        X += 60;
+    }
+}
+
+void Graph::PutItem(int x, int y, int id)
+{
+    SDL_Surface* item = NULL;
+    SDL_Rect dstrect = { x, y, 0, 0 };
+    switch (id)
+    {
+    case 0:
+        {
+            item = IMG_Load("src/Pictures/item0.jpg");
+            break;
+        }
+    case 1:
+        {
+            item = IMG_Load("src/Pictures/item1.jpg");
+            break;
+        }
+    case 2:
+        {
+            item = IMG_Load("src/Pictures/item2.jpg");
+            break;
+        }
+    case 3:
+        {
+            item = IMG_Load("src/Pictures/item3.jpg");
+            break;
+        }
+    case 4:
+        {
+            item = IMG_Load("src/Pictures/item4.jpg");
+            break;
+        }
+    case 5:
+        {
+            item = IMG_Load("src/Pictures/item5.jpg");
+            break;
+        }
+    case 6:
+        {
+            item = IMG_Load("src/Pictures/item6.jpg");
+            break;
+        }
+    case 7:
+        {
+            item = IMG_Load("src/Pictures/item7.jpg");
+            break;
+        }
+    case 8:
+        {
+            item = IMG_Load("src/Pictures/item8.jpg");
+            break;
+        }
+    case 9:
+        {
+            item = IMG_Load("src/Pictures/item9.jpg");
+            break;
+        }
+    case 10:
+        {
+            item = IMG_Load("src/Pictures/item10.jpg");
+            break;
+        }
+    case 11:
+        {
+            item = IMG_Load("src/Pictures/item11.jpg");
+            break;
+        }
+    case 12:
+        {
+            item = IMG_Load("src/Pictures/item12.jpg");
+            break;
+        }
+    case 13:
+        {
+            item = IMG_Load("src/Pictures/item13.jpg");
+            break;
+        }
+    case 14:
+        {
+            item = IMG_Load("src/Pictures/item14.jpg");
+            break;
+        }
+    case 15:
+        {
+            item = IMG_Load("src/Pictures/item15.jpg");
+            break;
+        }
+    case 16:
+        {
+            item = IMG_Load("src/Pictures/item16.jpg");
+            break;
+        }
+    }
+    SDL_BlitSurface(item, NULL, Surface, &dstrect);
+    SDL_UpdateWindowSurface(Window);
+    SDL_FreeSurface(item);
+}
+
+void Graph::Mouse()
+{
+    int X, Y;
+    SDL_Event* e;
+    if (e -> type == SDL_MOUSEBUTTONDOWN)
+        printf("x");
 }
