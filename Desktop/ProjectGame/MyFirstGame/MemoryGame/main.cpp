@@ -12,6 +12,11 @@ int main(int argc, char* args[])
     board.Print();
     g.CreatGameWindow(board.Width, board.Height, board.Map);
     g.InitMap(board);
-    SDL_Delay(10000);
+    while (true) {
+            SDL_Event event;
+            if (SDL_PollEvent(&event) != 0) {
+
+            }
+        }
     return 0;
 }

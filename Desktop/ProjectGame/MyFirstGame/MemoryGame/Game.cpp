@@ -3,6 +3,7 @@
 #include "GameData.h"
 #include <SDL.h>
 #include <SDL_image.h>
+using namespace std;
 bool Board :: Valid()
 {
     return (Width > 0) && (Height > 0) && (Width*Height % 2 == 0);
@@ -14,7 +15,7 @@ void Board :: Gen()
     Height = 4;
     srand(time(NULL));
     int numOfPairs = Width*Height/2;
-    int a[Width*Height];
+    int a[Width*Height+1];
     for (int i = 1; i <= Width*Height; i++)
         a[i] = (i+1)/2;
 
@@ -104,7 +105,6 @@ void Graph :: CreatGameWindow(int x, int y, int Map[50][50])
     background = IMG_Load("src/Background/background.jpg");
     SDL_BlitSurface(background, NULL, Surface, NULL);
     SDL_UpdateWindowSurface(Window);
-    SDL_Delay(1000);
     SDL_FreeSurface(background);
    // SDL_DestroyWindow(Window);
    // SDL_Quit();
@@ -118,6 +118,7 @@ void Graph::CloseWindow()
 
 void Graph::InitMap(Board board)
 {
+    auto start = chrono::steady_clock::now();
     int X = 50;
     int Y = 50;
     for (int i = 1; i <= board.Height; i++)
@@ -135,6 +136,9 @@ void Graph::InitMap(Board board)
         }
         X += 60;
     }
+    auto end = chrono::steady_clock::now();
+    cerr << "In milliseconds : "
+         << chrono::duration_cast<chrono::milliseconds>(end - start).count();
 }
 
 void Graph::PutItem(int x, int y, int id)
