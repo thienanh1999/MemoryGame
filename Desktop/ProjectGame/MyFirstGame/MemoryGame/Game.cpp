@@ -36,10 +36,12 @@ void Board :: Gen()
         {
             dem++;
             Map[i][j] = a[dem];
-            MapShow[i][j] = 1;
+            MapShow[i][j] = 0;
         }
     }
     Fliped = 0;
+    FlipingX = 0;
+    FlipingY = 0;
 }
 
 void Board :: Print()
@@ -54,18 +56,29 @@ void Board :: Print()
 
 void Board :: Flip(int x, int y)
 {
+    if (MapShow[x][y] == 1 || MapShow[x][y] == 2) return;
     Fliped++;
     MapShow[x][y] = 1;
+   // printf("%d %d\n",FlipingX,FlipingY);
     if (Fliped == 2)
     {
         if (Map[FlipingX][FlipingY] == Map[x][y])
-            printf("matched");
+        {
+            MapShow[x][y] = 2;
+            MapShow[FlipingX][FlipingY] = 2;
+            Fliped = 0;
+            FlipingX = 0;
+            FlipingY = 0;
+           // printf("matched");
+        }
         else
         {
             Fliped = 0;
             MapShow[x][y] = 0;
             MapShow[FlipingX][FlipingY] = 0;
-            printf("unmatched");
+            FlipingX = 0;
+            FlipingY = 0;
+           // printf("unmatched");
         }
     }
     else
@@ -92,6 +105,8 @@ void Board :: EndGame(bool IsWin, Match& match)
 
 void Graph :: CreatGameWindow(int x, int y, int Map[50][50])
 {
+    PreX = 0;
+    PreY = 0;
     Window = NULL;
     Surface = NULL;
     SDL_Surface* background = NULL;
@@ -113,7 +128,7 @@ void Graph :: CreatGameWindow(int x, int y, int Map[50][50])
 void Graph::CloseWindow()
 {
     SDL_DestroyWindow(Window);
-   // SLD_Quit();
+//    SLD_Quit();
 }
 
 void Graph::InitMap(Board board)
@@ -126,10 +141,9 @@ void Graph::InitMap(Board board)
         Y = 50;
         for (int j = 1; j <= board.Width; j++)
         {
-            if (board.MapShow[i][j] == false)
-                PutItem(Y,X,0);
-            else
-                PutItem(Y,X,board.Map[i][j]);
+            if (board.MapShow[i][j] == 0) PutItem(Y,X,0);
+            if (board.MapShow[i][j] == 1) PutItem(Y,X,board.Map[i][j]);
+            if (board.MapShow[i][j] == 2) PutItem(Y,X,17);
             PosX[i][j] = X;
             PosY[i][j] = Y;
             Y += 60;
@@ -137,8 +151,8 @@ void Graph::InitMap(Board board)
         X += 60;
     }
     auto end = chrono::steady_clock::now();
-    cerr << "In milliseconds : "
-         << chrono::duration_cast<chrono::milliseconds>(end - start).count();
+   /* cerr << "In milliseconds : "
+         << chrono::duration_cast<chrono::milliseconds>(end - start).count();*/
 }
 
 void Graph::PutItem(int x, int y, int id)
@@ -232,16 +246,40 @@ void Graph::PutItem(int x, int y, int id)
             item = IMG_Load("src/Pictures/item16.jpg");
             break;
         }
+    case 17:
+        {
+            item = IMG_Load("src/Pictures/item17.jpg");
+            break;
+        }
     }
     SDL_BlitSurface(item, NULL, Surface, &dstrect);
     SDL_UpdateWindowSurface(Window);
     SDL_FreeSurface(item);
 }
 
-void Graph::Mouse()
+void Graph::Click(int x, int y, Board& board)
 {
-    int X, Y;
-    SDL_Event* e;
-    if (e -> type == SDL_MOUSEBUTTONDOWN)
-        printf("x");
+    for (int i = 1; i <= board.Height; i++)
+        for (int j = 1; j <= board.Width; j++)
+            if (PosX[i][j] <= x && x <= PosX[i][j]+50)
+                if (PosY[i][j] <= y && y <= PosY[i][j]+50)
+                {
+                    if (PreX == x && PreY == y) return;
+                 //   printf("%d %d\n", i , j);
+                    if (board.Fliped == 1 && board.MapShow[i][j] == 0
+                        && board.Map[i][j] != board.Map[board.FlipingX][board.FlipingY])
+                    {
+                        board.MapShow[i][j] = 1;
+                        InitMap(board);
+                        board.MapShow[i][j] = 0;
+                        board.Flip(i,j);
+                    }
+                    else
+                    {
+                    board.Flip(i,j);
+                    InitMap(board);
+                    }
+                    PreX = x; PreY = y;
+                    return;
+                }
 }

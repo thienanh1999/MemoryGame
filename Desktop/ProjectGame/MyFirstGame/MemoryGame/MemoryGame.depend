@@ -5,7 +5,7 @@
 
 1524149197 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\generate.h
 
-1524925271 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\main.cpp
+1525021752 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\main.cpp
 	<iostream>
 	"Game.h"
 	"GameData.h"
@@ -17,12 +17,12 @@
 	"GameData.h"
 	<bits/stdc++.h>
 
-1524911586 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.h
+1525018315 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.h
 	"GameData.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1524924905 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.cpp
+1525020891 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.cpp
 	"Game.h"
 	<bits/stdc++.h>
 	"GameData.h"

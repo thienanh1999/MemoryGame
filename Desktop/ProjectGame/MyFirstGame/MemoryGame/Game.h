@@ -31,12 +31,14 @@ public:
     SDL_Surface* Surface;
     int PosX[50][50];
     int PosY[50][50];
+    int PreX;
+    int PreY;
 
     void CreatGameWindow(int, int, int[50][50]);
     void InitMap(Board);
     void CloseWindow();
     void PutItem(int, int, int);
-    void Mouse();
+    void Click(int,int,Board&);
 };
 
 #endif // GAME_H_INCLUDED
