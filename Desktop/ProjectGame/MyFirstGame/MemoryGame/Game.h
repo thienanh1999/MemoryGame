@@ -18,9 +18,9 @@ public:
     bool Valid();
     void Gen();
     void Print();
-    void Flip(int, int);
+    void Flip(int, int,Match&);
     void InitGame();
-    void EndGame(bool, Match&);
+    void EndGame(int, Match&);
 };
 
 class Graph{
@@ -38,7 +38,8 @@ public:
     void InitMap(Board);
     void CloseWindow();
     void PutItem(int, int, int);
-    void Click(int,int,Board&);
+    void Click(int,int,Board&,Match&);
+    void PrintScore(Match);
 };
 
 #endif // GAME_H_INCLUDED

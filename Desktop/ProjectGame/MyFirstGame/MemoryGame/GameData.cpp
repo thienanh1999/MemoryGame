@@ -3,17 +3,15 @@
 
 void Match :: Init()
 {
-    Win = 0;
-    Lose = 0;
+    Move = 0;
 }
 
 void Match :: Show()
 {
-    printf("%d %d",Win,Lose);
+    printf("%d",HighScore);
 }
 
-void Match :: Update(bool IsWin)
+void Match :: Update(int score)
 {
-    if (IsWin) Win++;
-    else Lose++;
+    HighScore = std::max(HighScore,score);
 }

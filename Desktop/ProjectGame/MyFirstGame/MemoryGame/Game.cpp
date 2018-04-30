@@ -54,9 +54,10 @@ void Board :: Print()
     }
 }
 
-void Board :: Flip(int x, int y)
+void Board :: Flip(int x, int y,Match& match)
 {
     if (MapShow[x][y] == 1 || MapShow[x][y] == 2) return;
+    match.Move++;
     Fliped++;
     MapShow[x][y] = 1;
    // printf("%d %d\n",FlipingX,FlipingY);
@@ -98,9 +99,9 @@ void Board :: InitGame()
     }
 }
 
-void Board :: EndGame(bool IsWin, Match& match)
+void Board :: EndGame(int score, Match& match)
 {
-    match.Update(IsWin);
+    match.Update(score);
 }
 
 void Graph :: CreatGameWindow(int x, int y, int Map[50][50])
@@ -251,13 +252,63 @@ void Graph::PutItem(int x, int y, int id)
             item = IMG_Load("src/Pictures/item17.jpg");
             break;
         }
+    case 20:
+        {
+            item = IMG_Load("src/Number/0.jpg");
+            break;
+        }
+    case 21:
+        {
+            item = IMG_Load("src/Number/1.jpg");
+            break;
+        }
+    case 22:
+        {
+            item = IMG_Load("src/Number/2.jpg");
+            break;
+        }
+    case 23:
+        {
+            item = IMG_Load("src/Number/3.jpg");
+            break;
+        }
+    case 24:
+        {
+            item = IMG_Load("src/Number/4.jpg");
+            break;
+        }
+    case 25:
+        {
+            item = IMG_Load("src/Number/5.jpg");
+            break;
+        }
+    case 26:
+        {
+            item = IMG_Load("src/Number/6.jpg");
+            break;
+        }
+    case 27:
+        {
+            item = IMG_Load("src/Number/7.jpg");
+            break;
+        }
+    case 28:
+        {
+            item = IMG_Load("src/Number/8.jpg");
+            break;
+        }
+    case 29:
+        {
+            item = IMG_Load("src/Number/9.jpg");
+            break;
+        }
     }
     SDL_BlitSurface(item, NULL, Surface, &dstrect);
     SDL_UpdateWindowSurface(Window);
     SDL_FreeSurface(item);
 }
 
-void Graph::Click(int x, int y, Board& board)
+void Graph::Click(int x, int y, Board& board,Match& match)
 {
     for (int i = 1; i <= board.Height; i++)
         for (int j = 1; j <= board.Width; j++)
@@ -272,14 +323,36 @@ void Graph::Click(int x, int y, Board& board)
                         board.MapShow[i][j] = 1;
                         InitMap(board);
                         board.MapShow[i][j] = 0;
-                        board.Flip(i,j);
+                        board.Flip(i,j,match);
+                        PrintScore(match);
                     }
                     else
                     {
-                    board.Flip(i,j);
+                    board.Flip(i,j,match);
                     InitMap(board);
+                    PrintScore(match);
                     }
                     PreX = x; PreY = y;
                     return;
                 }
+}
+
+void Graph::PrintScore(Match match)
+{
+    SDL_Surface* m = NULL;
+    SDL_Rect dstrect = { 150, 300, 0, 0 };
+    m = IMG_Load("src/Number/move.jpg");
+    SDL_BlitSurface(m, NULL, Surface, &dstrect);
+    SDL_UpdateWindowSurface(Window);
+    SDL_FreeSurface(m);
+    //Print move item
+
+    int mo = match.Move;
+    int X = 350;
+    for (int i = 1; i <= 3; i++)
+    {
+        PutItem(X,295,(mo%10)+20);
+        mo /= 10;
+        X-=50;
+    }
 }

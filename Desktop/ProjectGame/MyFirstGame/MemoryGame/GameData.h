@@ -3,11 +3,11 @@
 
 class Match {
 public:
-    int Win;
-    int Lose;
+    int Move;
+    int HighScore;
 
     void Show();
-    void Update(bool);
+    void Update(int);
     void Init();
 };
 

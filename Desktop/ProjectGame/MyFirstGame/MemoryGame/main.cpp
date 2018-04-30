@@ -6,6 +6,7 @@ using namespace std;
 
 Graph g;
 Board board;
+Match match;
 
 void mousePress(SDL_MouseButtonEvent& bt)
 {
@@ -14,16 +15,24 @@ void mousePress(SDL_MouseButtonEvent& bt)
     {
         SDL_GetMouseState(&x,&y);
         //cout << x << " " << y << endl;
-        g.Click(y,x,board);
+        g.Click(y,x,board,match);
     }
 }
 
 int main(int argc, char* args[])
 {
     board.Gen();
+    match.Init();
+    //Init map & score
+
     board.Print();
+    //Print key
+
     g.CreatGameWindow(board.Width, board.Height, board.Map);
     g.InitMap(board);
+    g.PrintScore(match);
+    //Display Game
+
     bool quit = false;
     while (true) {
             SDL_Event event;
@@ -32,5 +41,6 @@ int main(int argc, char* args[])
                     mousePress(event.button);
             }
         }
+    //Playgame
     return 0;
 }
