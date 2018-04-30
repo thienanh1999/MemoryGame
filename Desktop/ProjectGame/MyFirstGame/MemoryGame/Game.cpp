@@ -13,6 +13,7 @@ void Board :: Gen()
 {
     Width = 8;
     Height = 4;
+    Done = 32;
     srand(time(NULL));
     int numOfPairs = Width*Height/2;
     int a[Width*Height+1];
@@ -46,11 +47,12 @@ void Board :: Gen()
 
 void Board :: Print()
 {
+    freopen("src/GameData/Key.txt","w",stdout);
     for (int i = 1; i <= Height; i++)
     {
         for (int j = 1; j <= Width; j++)
-            printf("%d ",Map[i][j]);
-        printf("\n");
+            std::cout << Map[i][j] << " ";
+        std::cout << '\n';
     }
 }
 
@@ -67,9 +69,11 @@ void Board :: Flip(int x, int y,Match& match)
         {
             MapShow[x][y] = 2;
             MapShow[FlipingX][FlipingY] = 2;
+            Done -= 2;
             Fliped = 0;
             FlipingX = 0;
             FlipingY = 0;
+            if (Done == 0) EndGame(match.Move,match);
            // printf("matched");
         }
         else
@@ -86,16 +90,6 @@ void Board :: Flip(int x, int y,Match& match)
     {
         FlipingX = x;
         FlipingY = y;
-    }
-}
-
-void Board :: InitGame()
-{
-    for (int i = 1; i <= Height; i++)
-    {
-        for (int j = 1; j <= Width; j++)
-            printf("%d ",0);
-        printf("\n");
     }
 }
 
@@ -252,6 +246,11 @@ void Graph::PutItem(int x, int y, int id)
             item = IMG_Load("src/Pictures/item17.jpg");
             break;
         }
+    case 18:
+        {
+            item = IMG_Load("src/Pictures/win.jpg");
+            break;
+        }
     case 20:
         {
             item = IMG_Load("src/Number/0.jpg");
@@ -353,6 +352,26 @@ void Graph::PrintScore(Match match)
     {
         PutItem(X,295,(mo%10)+20);
         mo /= 10;
+        X-=50;
+    }
+}
+
+void Graph::UpdateHighscore(Match match)
+{
+    SDL_Surface* high = NULL;
+    SDL_Rect dstrect = { 150, 350, 0, 0 };
+    high = IMG_Load("src/Number/Highscore.jpg");
+    SDL_BlitSurface(high, NULL, Surface, &dstrect);
+    SDL_UpdateWindowSurface(Window);
+    SDL_FreeSurface(high);
+    //print highscore item
+
+    int highscore = match.HighScore;
+    int X = 450;
+    for (int i = 1; i <= 3; i++)
+    {
+        PutItem(X,345,(highscore%10)+20);
+        highscore /= 10;
         X-=50;
     }
 }

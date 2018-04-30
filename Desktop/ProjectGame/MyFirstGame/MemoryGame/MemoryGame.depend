@@ -5,24 +5,24 @@
 
 1524149197 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\generate.h
 
-1525091935 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\main.cpp
+1525099181 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\main.cpp
 	<iostream>
 	"Game.h"
 	"GameData.h"
 	<SDL.h>
 
-1525091668 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\gamedata.h
+1525096056 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\gamedata.h
 
-1525091686 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\gamedata.cpp
+1525098058 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\gamedata.cpp
 	"GameData.h"
 	<bits/stdc++.h>
 
-1525091958 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.h
+1525098398 c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.h
 	"GameData.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1525092458 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.cpp
+1525099266 source:c:\users\jinny\desktop\projectgame\myfirstgame\memorygame\game.cpp
 	"Game.h"
 	<bits/stdc++.h>
 	"GameData.h"

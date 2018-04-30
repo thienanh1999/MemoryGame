@@ -13,13 +13,13 @@ public:
     int FlipingY;
     int Map[50][50];
     int MapShow[50][50];
+    int Done;
     //= 0 unfliped, 1 fliped, 2 done
 
     bool Valid();
     void Gen();
     void Print();
     void Flip(int, int,Match&);
-    void InitGame();
     void EndGame(int, Match&);
 };
 
@@ -40,6 +40,7 @@ public:
     void PutItem(int, int, int);
     void Click(int,int,Board&,Match&);
     void PrintScore(Match);
+    void UpdateHighscore(Match);
 };
 
 #endif // GAME_H_INCLUDED

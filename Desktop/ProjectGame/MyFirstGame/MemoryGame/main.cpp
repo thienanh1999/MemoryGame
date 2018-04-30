@@ -16,6 +16,10 @@ void mousePress(SDL_MouseButtonEvent& bt)
         SDL_GetMouseState(&x,&y);
         //cout << x << " " << y << endl;
         g.Click(y,x,board,match);
+        if (board.Done == 0)
+        {
+            g.PutItem(50,50,18);
+        }
     }
 }
 
@@ -31,6 +35,7 @@ int main(int argc, char* args[])
     g.CreatGameWindow(board.Width, board.Height, board.Map);
     g.InitMap(board);
     g.PrintScore(match);
+    g.UpdateHighscore(match);
     //Display Game
 
     bool quit = false;

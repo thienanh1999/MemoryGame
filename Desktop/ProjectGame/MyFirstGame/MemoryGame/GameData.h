@@ -6,7 +6,6 @@ public:
     int Move;
     int HighScore;
 
-    void Show();
     void Update(int);
     void Init();
 };
