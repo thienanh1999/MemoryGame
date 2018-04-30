@@ -34,7 +34,7 @@ public:
     int PreX;
     int PreY;
 
-    void CreatGameWindow(int, int, int[50][50]);
+    void CreatGameWindow();
     void InitMap(Board);
     void CloseWindow();
     void PutItem(int, int, int);

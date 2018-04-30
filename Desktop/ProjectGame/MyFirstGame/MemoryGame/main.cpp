@@ -7,6 +7,7 @@ using namespace std;
 Graph g;
 Board board;
 Match match;
+bool Replay;
 
 void mousePress(SDL_MouseButtonEvent& bt)
 {
@@ -15,6 +16,11 @@ void mousePress(SDL_MouseButtonEvent& bt)
     {
         SDL_GetMouseState(&x,&y);
         //cout << x << " " << y << endl;
+        if (250 <= x && x <= 350 && 420 <= y && y <= 520)
+        {
+            Replay = true;
+            return;
+        }
         g.Click(y,x,board,match);
         if (board.Done == 0)
         {
@@ -23,7 +29,7 @@ void mousePress(SDL_MouseButtonEvent& bt)
     }
 }
 
-int main(int argc, char* args[])
+void Play()
 {
     board.Gen();
     match.Init();
@@ -32,13 +38,11 @@ int main(int argc, char* args[])
     board.Print();
     //Print key
 
-    g.CreatGameWindow(board.Width, board.Height, board.Map);
     g.InitMap(board);
     g.PrintScore(match);
     g.UpdateHighscore(match);
     //Display Game
 
-    bool quit = false;
     while (true) {
             SDL_Event event;
             if (SDL_PollEvent(&event) != 0) {
@@ -46,6 +50,26 @@ int main(int argc, char* args[])
                     mousePress(event.button);
             }
         }
+    Replay = false;
     //Playgame
+}
+
+int main(int argc, char* args[])
+{
+    g.CreatGameWindow();
+    g.PutItem(250,420,19);
+    //250-350 ; 420-520
+    while (true) {
+            SDL_Event event;
+            if (SDL_PollEvent(&event) != 0) {
+                if (event.type = SDL_MOUSEBUTTONDOWN)
+                {
+                    mousePress(event.button);
+                    if (Replay)
+                        Play();
+                }
+            }
+        }
+    //event - click replay -> Play();
     return 0;
 }

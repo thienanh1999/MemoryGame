@@ -98,7 +98,7 @@ void Board :: EndGame(int score, Match& match)
     match.Update(score);
 }
 
-void Graph :: CreatGameWindow(int x, int y, int Map[50][50])
+void Graph :: CreatGameWindow()
 {
     PreX = 0;
     PreY = 0;
@@ -249,6 +249,11 @@ void Graph::PutItem(int x, int y, int id)
     case 18:
         {
             item = IMG_Load("src/Pictures/win.jpg");
+            break;
+        }
+    case 19:
+        {
+            item = IMG_Load("src/Pictures/replay.jpg");
             break;
         }
     case 20:
