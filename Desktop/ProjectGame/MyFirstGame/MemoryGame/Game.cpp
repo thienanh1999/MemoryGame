@@ -120,12 +120,6 @@ void Graph :: CreatGameWindow()
    // SDL_Quit();
 }
 
-void Graph::CloseWindow()
-{
-    SDL_DestroyWindow(Window);
-//    SLD_Quit();
-}
-
 void Graph::InitMap(Board board)
 {
     auto start = chrono::steady_clock::now();
@@ -253,7 +247,7 @@ void Graph::PutItem(int x, int y, int id)
         }
     case 19:
         {
-            item = IMG_Load("src/Pictures/replay.jpg");
+            item = IMG_Load("src/Pictures/start.jpg");
             break;
         }
     case 20:

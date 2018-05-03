@@ -36,7 +36,6 @@ public:
 
     void CreatGameWindow();
     void InitMap(Board);
-    void CloseWindow();
     void PutItem(int, int, int);
     void Click(int,int,Board&,Match&);
     void PrintScore(Match);
