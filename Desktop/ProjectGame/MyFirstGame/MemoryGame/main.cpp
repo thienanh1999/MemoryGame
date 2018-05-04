@@ -7,7 +7,8 @@ using namespace std;
 Graph g;
 Board board;
 Match match;
-bool Replay;
+bool Start;
+bool quit = false;
 
 void mousePress(SDL_MouseButtonEvent& bt)
 {
@@ -18,7 +19,7 @@ void mousePress(SDL_MouseButtonEvent& bt)
         //cout << x << " " << y << endl;
         if (250 <= x && x <= 350 && 420 <= y && y <= 520)
         {
-            Replay = true;
+            Start = true;
             return;
         }
         g.Click(y,x,board,match);
@@ -31,6 +32,7 @@ void mousePress(SDL_MouseButtonEvent& bt)
 
 void Play()
 {
+    Start = false;
     board.Gen();
     match.Init();
     //Init map & score
@@ -38,37 +40,52 @@ void Play()
     board.Print();
     //Print key
 
+    g.DrawBackground();
     g.InitMap(board);
     g.PrintScore(match);
     g.UpdateHighscore(match);
+    g.PutItem(250,420,30);
     //Display Game
 
-    while (true) {
+    while (!quit) {
             SDL_Event event;
             if (SDL_PollEvent(&event) != 0) {
-                if (event.type = SDL_MOUSEBUTTONDOWN)
+                if (event.type == SDL_MOUSEBUTTONDOWN)
+                {
                     mousePress(event.button);
+                    if (Start)
+                        return;
+                }
+                if (event.type == SDL_QUIT)
+                    quit = true;
             }
         }
-    Replay = false;
     //Playgame
 }
 
 int main(int argc, char* args[])
 {
     g.CreatGameWindow();
+    g.DrawBackground();
     g.PutItem(250,420,19);
     //250-350 ; 420-520
-    while (true) {
+    while (!quit) {
             SDL_Event event;
             if (SDL_PollEvent(&event) != 0) {
-                if (event.type = SDL_MOUSEBUTTONDOWN)
+                if (event.type == SDL_MOUSEBUTTONDOWN)
                 {
                     mousePress(event.button);
-                    if (Replay)
+                    if (Start)
                         Play();
+                }
+                if (event.type == SDL_QUIT)
+                {
+                    quit = true;
                 }
             }
         }
+
+    SDL_DestroyWindow(g.Window);
+    SDL_Quit();
     return 0;
 }

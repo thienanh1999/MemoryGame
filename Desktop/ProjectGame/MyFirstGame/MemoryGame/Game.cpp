@@ -104,20 +104,21 @@ void Graph :: CreatGameWindow()
     PreY = 0;
     Window = NULL;
     Surface = NULL;
-    SDL_Surface* background = NULL;
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_JPG || IMG_INIT_PNG);
 
     Window = SDL_CreateWindow("Main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, SDL_WINDOW_SHOWN);
     //name, vi tri x, vi tri y, width, height, ability
     Surface = SDL_GetWindowSurface(Window);
-    //background = SDL_LoadBMP("src/Background/background.bmp");
+}
+
+void Graph::DrawBackground()
+{
+    SDL_Surface* background = NULL;
     background = IMG_Load("src/Background/background.jpg");
     SDL_BlitSurface(background, NULL, Surface, NULL);
     SDL_UpdateWindowSurface(Window);
     SDL_FreeSurface(background);
-   // SDL_DestroyWindow(Window);
-   // SDL_Quit();
 }
 
 void Graph::InitMap(Board board)
@@ -298,6 +299,11 @@ void Graph::PutItem(int x, int y, int id)
     case 29:
         {
             item = IMG_Load("src/Number/9.jpg");
+            break;
+        }
+    case 30:
+        {
+            item = IMG_Load("src/Pictures/replay.jpg");
             break;
         }
     }

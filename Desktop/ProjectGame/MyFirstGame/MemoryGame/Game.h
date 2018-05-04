@@ -35,6 +35,7 @@ public:
     int PreY;
 
     void CreatGameWindow();
+    void DrawBackground();
     void InitMap(Board);
     void PutItem(int, int, int);
     void Click(int,int,Board&,Match&);
